@@ -59,7 +59,7 @@ class TestPoincare(nn.Module):
         apow = anorms.pow(2).neg_().add_(1).unsqueeze(1).expand(a_sz, b_sz)
         bpow = bnorms.pow(2).neg_().add_(1).unsqueeze(0).expand(a_sz, b_sz)
         denom = apow.mul(bpow) # [a.size(0), b.size(0)]
-        inner = d.div(denom).mul_(2).add_(1)
+        inner = d.pow(2).div(denom).mul_(2).add_(1)
         out = self.arcosh(inner) #[a.size(0), b.size(0)]
         return out
 
