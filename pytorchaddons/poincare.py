@@ -70,3 +70,9 @@ class PoincareDistance(Function):
         if d.dim() > 2:
             d = d.squeeze(2)
         return d
+    
+    @staticmethod
+    def confinetodisc(theta, norm = 1.0, eps = 1e-4):
+        norms = torch.norm(theta, p = 2, dim = 1).squeeze(1)
+        tofix = norms.gte(norm)
+        theta[tofix].div_(norms[tofix]).sub_(eps)
