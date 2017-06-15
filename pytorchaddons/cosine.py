@@ -16,8 +16,6 @@ class CosineDistance(Function):
         bnorms = torch.norm(b, p = 2, dim = 1).squeeze(1)
         denom = torch.ger(anorms, bnorms) # [a, b]
         numer = a2.mul(b2).sum(2).squeeze(2)
-        print(numer.size())
-        print(denom.size())
         d = numer.div(denom)
         if not self.similarity:
             d = d.neg_().add_(2)
